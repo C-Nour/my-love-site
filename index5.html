@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BBRT3LK7Y3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BBRT3LK7Y3');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بحبك 💘</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* كود الـ CSS الأصلي بالكامل مع التحديثات المطلوبة */
+        * { -webkit-user-select: none; -webkit-touch-callout: none; user-select: none; scroll-behavior: smooth; box-sizing: border-box; }
+        
+        body { 
+            background: linear-gradient(120deg, #fdf2f5, #fff9fb, #fce4ec); 
+            background-size: 400% 400%; 
+            animation: gradientBG 10s ease infinite, fadeInSite 1.5s ease-out; 
+            margin: 0; font-family: 'Cairo', sans-serif; direction: rtl; 
+            overflow-x: hidden;
+        }
+        @keyframes fadeInSite { from { opacity: 0; } to { opacity: 1; } }
+        
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .mobile-wrapper { width: 100%; min-height: 100vh; position: relative; overflow-x: hidden; padding-bottom: 100px; z-index: 1; }
+        .main-header { height: 250px; background-size: cover; background-position: center; position: relative; }
+        .pink-overlay { background: rgba(244, 143, 177, 0.3); height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+        .heart-pulse { animation: pulse 0.8s infinite alternate; }
+        @keyframes pulse { to { transform: scale(1.1); } }
+        .screen-box { padding: 40px 25px; text-align: center; }
+        
+        /* تحديث لون وتصميم الكروت لتطابق الصورة الأخيرة */
+        .romantic-card, .glass-timer { background: #fff !important; backdrop-filter: blur(15px); border-radius: 20px; border: 2px solid #f06292; box-shadow: 0 8px 32px rgba(244, 143, 177, 0.15); padding: 20px; margin: 10px; }
+        .letter-text { color: #ad1457; line-height: 1.8; text-align: center; font-size: 0.95rem; min-height: 100px; }
+        .timer-section { padding: 30px 20px; text-align: center; }
+        .countdown-grid { display: flex; justify-content: space-around; margin: 15px 0; gap: 8px; }
+        .unit { background: rgba(255, 255, 255, 0.6); padding: 10px; border-radius: 12px; border: 1px solid #f8bbd0; flex: 1; }
+        .unit span { display: block; font-size: 1.3rem; font-weight: bold; color: #f06292; }
+        .unit p { margin: 5px 0 0; }
+        .photo-list { padding: 20px; }
+        .photo-card { text-align: center; margin-bottom: 40px; position: relative; }
+        .photo-card p { margin-top: 10px; font-weight: bold; color: #ad1457; font-size: 0.9rem; line-height: 1.4; position: relative; z-index: 2; }
+        
+        .photo-card img { 
+            width: 100%; 
+            max-height: 480px;
+            object-fit: contain;
+            border-radius: 20px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: pointer; 
+            z-index: 5; 
+            position: relative;
+            background: #fff;
+            border: 2px solid #f8bbd0; 
+        }
+        .photo-card img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(244, 143, 177, 0.4);
+            border-color: #f06292; 
+        }
+        .photo-card img:active { 
+            transform: scale(0.98); 
+        }
+
+        .img-emoji-pop {
+            position: fixed; pointer-events: none; z-index: 1000;
+            font-size: 55px; 
+            animation: emojiFancyPop 1s ease-out forwards;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+        @keyframes emojiFancyPop {
+            0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+            30% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) translateY(-120px) rotate(-10deg); opacity: 0; }
+        }
+
+        .pink-btn { background: #f06292; color: white; border: none; padding: 15px; border-radius: 25px; width: 90%; cursor: pointer; font-weight: bold; font-family: 'Cairo'; margin-top: 15px; border: 2px solid #ad1457; }
+        
+        .nav-controls { position: fixed; top: 15px; left: 15px; z-index: 9999; }
+        .nav-controls button { 
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); 
+            border: 1px solid #f8bbd0; color: #ad1457; padding: 8px 18px; 
+            border-radius: 50px; font-weight: bold; font-family: 'Cairo'; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;
+        }
+
+        .player-bar { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px); border-radius: 50px; padding: 10px 15px; z-index: 1000; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .player-container { display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; gap: 10px; color: #580a1e; }
+        .player-thumb { width: 45px; height: 45px; border-radius: 50%; background-size: cover; border: 2px solid #f06292; position: relative; }
+
+        .music-bars { display: none; justify-content: center; gap: 2px; height: 12px; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); }
+        .rotating .music-bars { display: flex; }
+        .bar { width: 2px; background: #f06292; animation: musicWave 0.8s infinite alternate ease-in-out; }
+        @keyframes musicWave { from { height: 4px; } to { height: 14px; } }
+
+        .rotating { animation: spin 8s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .player-controls { display: flex; align-items: center; gap: 10px; }
+        .main-play-btn { background: #f06292; border: none; width: 35px; height: 35px; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(240, 98, 146, 0.3); }
+        .player-info { flex-grow: 1; text-align: center; overflow: hidden; }
+        .song-name { margin: 0; font-size: 10px; font-weight: bold; white-space: nowrap; color: #ad1457; }
+        .progress-area { display: flex; align-items: center; gap: 5px; font-size: 8px; opacity: 0.8; }
+        .progress-bar { flex-grow: 1; height: 4px; background: rgba(0, 0, 0, 0.05); border-radius: 10px; position: relative; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: #f06292; transition: width 0.1s linear; }
+        
+        .message-glass-btn { background: rgba(136, 14, 79, 0.7); color: white; padding: 12px 30px; border: 1px solid #f48fb1; border-radius: 50px; font-weight: bold; cursor: pointer; display: block; width: 85%; max-width: 300px; margin: 15px auto; text-align: center; border: 2px solid #ad1457; }
+        
+        /* التعديل الجوهري لتصميم الـ Popups ليتطابق مع الصور */
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+        
+        .popup-box-glass { 
+            background: #ffffff !important; 
+            width: 90%; 
+            max-width: 380px;
+            border-radius: 30px; 
+            padding: 20px; 
+            text-align: center; 
+            border: 2px solid #f06292; 
+            position: relative; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2); 
+            animation: popupSlideUp 0.4s ease-out;
+        }
+        @keyframes popupSlideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .popup-content-glass { color: #ad1457; line-height: 1.7; font-size: 1rem; }
+        .popup-content-glass p { margin-bottom: 15px; }
+
+        .close-btn-glass { 
+            background: #f06292; 
+            color: white; 
+            border: none; 
+            padding: 12px 0; 
+            border-radius: 50px; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            width: 80%;
+            margin: 10px auto 5px;
+            display: block;
+            box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3);
+        }
+
+        /* تصميم خريطة الذكريات ليتطابق مع الفيديو */
+        .timeline-box { 
+            background: #ffffff !important; 
+            border-radius: 15px; 
+            padding: 12px 15px; 
+            margin-bottom: 15px; 
+            text-align: right; 
+            border-right: 10px solid #f06292; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.05); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 3px; 
+            position: relative;
+            border-top: 1px solid #fce4ec;
+            border-bottom: 1px solid #fce4ec;
+            border-left: 1px solid #fce4ec;
+        }
+        .timeline-date { color: #f06292; font-weight: bold; font-size: 0.85rem; }
+        .timeline-title { color: #ad1457; font-weight: 500; font-size: 1rem; }
+
+        .hidden { display: none; }
+        
+        .video-wrapper { width: 90%; margin: 20px auto; border-radius: 25px; border: 3px solid #f8bbd0; overflow: hidden; box-shadow: 0 10px 30px rgba(244, 143, 177, 0.4); background: #000; animation: videoGlow 3s infinite alternate; }
+        @keyframes videoGlow { from { border-color: #f8bbd0; } to { border-color: #f06292; } }
+        video { width: 100%; height: auto; display: block; }
+
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 5px; background: #f06292; z-index: 2001; width: 0%; transition: width 0.1s; }
+        .touch-heart { position: fixed; pointer-events: none; animation: flyHeart 1s forwards; font-size: 24px; z-index: 9999; }
+        @keyframes flyHeart { 0% { transform: scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(2); opacity: 0; } }
+
+        .skip-typing-btn { background: none; border: 2px solid #f06292; color: #f06292; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; margin-top: 10px; cursor: pointer; transition: 0.3s; }
+        .skip-typing-btn:hover { background: #f06292; color: white; }
+
+        .main-title {
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            -webkit-text-stroke: 1.5px #ad1457;
+            text-shadow: 2px 2px 10px rgba(173, 20, 87, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .beating-heart {
+            color: #e91e63;
+            animation: heartBeat 1.2s infinite ease-in-out;
+            -webkit-text-stroke: 0;
+            display: inline-block;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .glass-timer {
+            border: 2px solid #f8bbd0;
+            padding: 25px;
+            margin: 20px auto;
+            border-radius: 20px;
+            width: 95%;
+        }
+
+        .confession-card {
+            border: 2px dashed #ad1457;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(244, 143, 177, 0.1);
+            margin-top: 20px;
+        }
+
+        .falling-heart {
+            position: fixed;
+            top: -50px;
+            font-size: 20px;
+            color: #f06292;
+            pointer-events: none;
+            z-index: 0;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .timeline-main-title { margin-bottom: 20px; color: #ad1457; font-size: 1.4rem; font-weight: bold; text-align: center; }
+        .timeline-footer-text { font-size: 0.95rem; margin: 15px 0; color: #ad1457; line-height: 1.5; text-align: center; }
+    </style>
+</head>
+<body onclick="createTouchHeart(event)">
+
+    <div id="scroll-progress"></div>
+
+    <div class="mobile-wrapper">
+        <div id="fallingHeartsContainer"></div>
+        <div id="heartsContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;"></div>
+        <div id="navBar" class="nav-controls hidden">
+            <button onclick="goBack()">◀ رجوع</button>
+        </div>
+        <header class="main-header" style="background-image: url('https://i.postimg.cc/QC1NY9Dh/1776980633251-4.jpg');">
+            <div class="pink-overlay">
+                <h1 class="main-title"> <span class="beating-heart">💘</span></h1>
+            </div>
+        </header>
+        <section id="lockScreen" class="screen-box">
+            <div class="romantic-card" style="border: 2px solid #ad1457;">
+                <div id="timeGreeting" style="color: #ad1457; font-weight: bold; margin-bottom: 10px;"></div>
+                <p> 🌍 عالمنا الخاص 🌍 </p>
+                <input type="password" id="passInput" placeholder="Password is Love" style="padding:10px; border-radius:10px; border:1px solid #f8bbd0; text-align:center;">
+                <button class="pink-btn" onclick="checkPassword()"> Unlock 🔓</button>
+            </div>
+        </section>
+        <section id="messageScreen" class="screen-box hidden">
+            <div class="romantic-card reveal" style="border: 2px solid #ad1457;">
+                <p id="typedLetter" class="letter-text"></p>
+                <button id="skipBtn" class="skip-typing-btn" onclick="skipTyping()">تخطي الكتابة وعرض الرسالة ⚡</button>
+                <button id="afterTypeBtn" class="pink-btn hidden" onclick="showGallery()">فتح ذكرياتنا ✨</button>
+            </div>
+        </section>
+        <main id="gallerySection" class="hidden">
+            <div class="timer-section reveal">
+                <h2 style="color: #ad1457; margin-bottom: 15px;">💕 بدايتنا</h2>
+                <div class="glass-timer">
+                    <p>سوا من <span style="color: #f06292; font-weight: bold;">08-12-2024</span> ❤️</p>
+                    <div class="countdown-grid">
+                        <div class="unit"> <span id="days">0</span> <p>يوم</p> </div>
+                        <div class="unit"> <span id="hours">0</span> <p>ساعة</p> </div>
+                        <div class="unit"> <span id="mins">0</span> <p>دقيقة</p> </div>
+                        <div class="unit"> <span id="secs">0</span> <p>ثانية</p> </div>
+                    </div>
+
+                    <div class="confession-card">
+                        <p style="color: #ad1457; font-weight: bold; margin: 0;">يوم ما قولتلك بحبك ❤️</p>
+                        <p style="color: #f06292; font-weight: bold; font-size: 1.1rem; margin: 5px 0;">08-12-2024</p>
+                    </div>
+
+                    <p class="quote" style="margin-top: 15px;">كل ثانية بتعدي وإنتي في قلبي ❤️</p>
+                </div>
+            </div>
+
+            <div class="video-wrapper reveal">
+                <video id="mainVideo" controls preload="auto" playsinline webkit-playsinline poster="https://i.postimg.cc/QC1NY9Dh/1776980633251-4.jpg">
+                    <source src="https://www.dropbox.com/scl/fi/vlkc6m3kqqskrujq297vi/VID-20260405-WA0000.mp4?rlkey=f4q897uw3b433bucyaijc4d8m&st=bso80ujx&raw=1" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو.
+                </video>
+            </div>
+
+            <div class="photo-list">
+                <div class="photo-card reveal"><p>صوره مع القمر 🌑💖</p><img src="https://i.postimg.cc/NFmGC9cn/IMG-20260424-WA0004(1).jpg" onclick="photoClickEffect(event)"></div>
+                <div class="photo-card reveal"><p>قمر اوي بجد هو في كده حلاوة وجمال سحرتني 💓</p><img src="https://i.postimg.cc/8cMkXJS3/IMG-20260424-WA0005(1).jpg" onclick="photoClickEffect(event)"></div>
+                <div class="photo-card reveal"><p>اجمل صورة لينا بنسبة ليا ♥️✨</p><img src="https://i.postimg.cc/przVchH4/IMG-20260424-WA0006(1).jpg" onclick="photoClickEffect(event)"></div>
+                <div class="photo-card reveal"><p>بعشقك يا زوزتي 💓</p><img src="https://i.postimg.cc/Fz3FCd4M/IMG-20260424-WA0007(1).jpg" onclick="photoClickEffect(event)"></div>
+                <div class="photo-card reveal"><p>الفلتر المضحك اللي زوزو بتحبه 😂♥️</p><img src="https://i.postimg.cc/0jD5XMvq/IMG-20260424-WA0008.jpg" onclick="photoClickEffect(event)"></div>
+                <div class="photo-card reveal"><p>بعيداً عن اني شكلنا مضحك بس قمر ♥️🌑</p><img src="https://i.postimg.cc/kGKMY6Cm/IMG-20260424-WA0009.jpg" onclick="photoClickEffect(event)"></div>
+            </div>
+            
+            <button class="message-glass-btn reveal" onclick="openPopup()">💓رسالة من القلب 💓</button>
+            <button class="message-glass-btn reveal" onclick="openTimeline()" style="background: rgba(173, 20, 87, 0.8);">♥️ خريطة ذكرياتنا | Our Timeline ♥️</button>
+        </main>
+
+        <div id="messagePopup" class="popup-overlay hidden">
+            <div class="popup-box-glass">
+                <div class="popup-content-glass">
+                    <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 20px;">💓 رسالة من القلب 💓</p>
+                    <p>لو سألوني إيه أحلى حاجة حصلتلي في حياتي، هقولهم اليوم اللي عرفتك فيه 💓</p>
+                    <p>وجودك في حياتي هو اللي بيطمن قلبي، وضحكتك دي بالنسبة لي هي اللي بتهون عليا أي صعب بشوفه 🩷</p>
+                    <p>بحبك بكل حالاتك وبتفاصيلك اللي مفيش حد يعرفها غيري 💞</p>
+                    <p>إنتي الحلم اللي بعيش عشانه وبسعى طول الوقت إني أحققه 💝</p>
+                    <p>حقك عليا لو كنت زعلتك في يوم، وعايزك تعرفي إني بحبك يا زوزو وبعشق كل لحظة وإحنا سوا 💘✨</p>
+                </div>
+                <button class="close-btn-glass" onclick="closePopup()">إغلاق</button>
+            </div>
+        </div>
+
+        <div id="timelinePopup" class="popup-overlay hidden">
+            <div class="popup-box-glass">
+                <h3 class="timeline-main-title">❤️ خريطة ذكرياتنا ❤️</h3>
+                <div class="timeline-box"><span class="timeline-date">2024 . 12 . 08</span><span class="timeline-title">يوم ارتباطنا ❤️</span></div>
+                <div class="timeline-box"><span class="timeline-date">2024 . 12 . 10</span><span class="timeline-title">أول مقابلة جمعت بيننا بعد ارتباطنا 💓</span></div>
+                <div class="timeline-box"><span class="timeline-date">2025 . 11 . 14</span><span class="timeline-title">عودتنا 💘</span></div>
+                <div class="timeline-box"><span class="timeline-date">2026 . 01 . 27</span><span class="timeline-title">ذكرى الخاتم الأول 💍❤️</span></div>
+                <div class="timeline-box"><span class="timeline-date">2026 . 02 . 26</span><span class="timeline-title">احتفالنا بعيد ميلادك 🎁🎂</span></div>
+                <div class="timeline-box"><span class="timeline-date">2026 . 03 . 24</span><span class="timeline-title">ذكرى الخاتم 💍🩵</span></div>
+                <div class="timeline-box"><span class="timeline-date">2026 . 04 . 04</span><span class="timeline-title">أول مرة ننزل سوي بعد فترة طويلة 💞</span></div>
+                <div class="timeline-box"><span class="timeline-date">2026 . 04 . 25</span><span class="timeline-title">أجمل هدية 🎁💝</span></div>
+                <div class="timeline-box"><span class="timeline-date">2026 . 04 . 28</span><span class="timeline-title">احتفالنا بعيد ميلادي 🎊🎈</span></div>
+                <div class="timeline-box"><span class="timeline-date">2026 . 04 . 30</span><span class="timeline-title">اجمل كيك من ايد زوزو 🎂</span></div>
+                
+                <p class="timeline-footer-text">
+                    💞 دي مش مجرد تواريخ، دي أجمل ذكرياتنا أنا وأنتِ ولحظات عمري ما أنساها 💞
+                </p>
+                <button class="close-btn-glass" onclick="closeTimeline()">إغلاق</button>
+            </div>
+        </div>
+
+        <div id="musicPlayer" class="player-bar hidden">
+            <div class="player-container">
+                <div id="musicThumb" class="player-thumb" style="background-image: url('https://i.postimg.cc/QC1NY9Dh/1776980633251-4.jpg');">
+                    <div class="music-bars">
+                        <div class="bar" style="animation-delay: 0s"></div>
+                        <div class="bar" style="animation-delay: 0.2s"></div>
+                        <div class="bar" style="animation-delay: 0.4s"></div>
+                    </div>
+                </div>
+                <div class="player-controls">
+                    <button id="playBtn" onclick="togglePlay()" class="main-play-btn">⏸</button>
+                </div>
+                <div class="player-info">
+                    <p class="song-name">تامر عاشور - قد الوعد 😍</p>
+                    <div class="progress-area">
+                        <span id="durationTime">0:00</span>
+                        <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+                        <span id="currentTime">0:00</span>
+                    </div>
+                </div>
+            </div>
+            <audio id="bgMusic" loop><source src="https://files.catbox.moe/81jbg0.mp3" type="audio/mpeg"></audio>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        const video = document.getElementById('mainVideo');
+        const playBtn = document.getElementById('playBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationTimeEl = document.getElementById('durationTime');
+        const musicThumb = document.getElementById('musicThumb');
+        
+        let typingInterval; 
+        let lastEmoji = ""; 
+        const messageText = "يا كل حاجة في حياتي.. يا زهراء ❤️\n\nحبيت أبدأ معاكي السنة الجديدة بهدية مختلفة، تكون شاهدة على كل لحظة حلوة عشناها وتفضل معانا دايمًا. وجودك في حياتي هو أحلى وأجمل حاجة حصلت لي.\n\nحقك عليا لو في يوم ضايقتك أو قصرت في حقك، إحنا النهادرة بنبدأ بداية جديدة سوا نمسح فيها أي زعل ونفتكر بس \"الميموريز\" اللي بتفرحنا.\n\nربنا يخليكي ليا يا حبيبة قلبي، وميحرمنيش منك أبدًا.. تعالي نلف لفة في ذكرياتنا.\n\nبحبك يا زوزو.. يا كل حياتي.";
+
+        function createFallingHearts() {
+            const container = document.getElementById('fallingHeartsContainer');
+            const heart = document.createElement('div');
+            heart.innerHTML = ['❤️', '💖', '💘', '💕'][Math.floor(Math.random() * 4)];
+            heart.className = 'falling-heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.opacity = Math.random();
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createFallingHearts, 300);
+
+        window.onload = function() {
+            confetti({ particleCount: 120, spread: 70, origin: { y: 0.75 }, colors: ['#f06292', '#ffffff', '#ad1457'] });
+        };
+
+        function triggerHaptic() { if (window.navigator.vibrate) window.navigator.vibrate(50); }
+        
+        function createTouchHeart(e) {
+            if (e.target.tagName === 'IMG') return; 
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️'; heart.className = 'touch-heart';
+            heart.style.left = e.clientX + 'px'; heart.style.top = e.clientY + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
+        }
+
+        function photoClickEffect(e) {
+            e.stopPropagation(); 
+            triggerHaptic();
+            confetti({
+                particleCount: 15,
+                startVelocity: 15,
+                spread: 360,
+                ticks: 50,
+                origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
+                colors: ['#f06292', '#ffeb3b', '#ffffff'],
+                shapes: ['circle'],
+                scalar: 0.5,
+                gravity: 0.3
+            });
+
+            const emojiList = Array.from('💓💖💝🩷💘💗💞💕️️‍🔥💜🥰😍😘🌑🔥♥️❤️❣️🫰🫶');
+            let randomEmoji;
+            do {
+                randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
+            } while (randomEmoji === lastEmoji);
+            lastEmoji = randomEmoji;
+            
+            const effect = document.createElement('div');
+            effect.innerHTML = randomEmoji;
+            effect.className = 'img-emoji-pop';
+            effect.style.left = (e.clientX - 25) + 'px';
+            effect.style.top = (e.clientY - 25) + 'px';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 1000);
+        }
+
+        video.addEventListener('play', () => { music.volume = 0.2; });
+        video.addEventListener('pause', () => { music.volume = 1.0; });
+
+        music.addEventListener('timeupdate', () => {
+            const { currentTime, duration } = music;
+            const progressPercent = (currentTime / duration) * 100;
+            progressFill.style.width = `${progressPercent}%`;
+            const formatTime = (time) => {
+                const min = Math.floor(time / 60);
+                const sec = Math.floor(time % 60);
+                return `${min}:${sec < 10 ? '0' + sec : sec}`;
+            };
+            currentTimeEl.innerText = formatTime(currentTime);
+            if(duration) durationTimeEl.innerText = formatTime(duration);
+        });
+
+        function setGreeting() {
+            const hour = new Date().getHours();
+            const greet = document.getElementById('timeGreeting');
+            greet.innerText = (hour < 12) ? "صباح الجمال على عيون زوزو ❤️" : "مساء الجمال يا كل حياتي ❤️";
+        }
+        setGreeting();
+
+        function revealElements() {
+            let reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                let windowHeight = window.innerHeight;
+                let elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) el.classList.add('active');
+            });
+        }
+
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let scrolled = (winScroll / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+            revealElements();
+        };
+
+        function checkPassword() {
+            triggerHaptic();
+            const pass = document.getElementById('passInput').value;
+            if (pass.toLowerCase().trim() === "love") {
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#f06292', '#ad1457', '#ffffff'] });
+                document.getElementById('lockScreen').style.display = 'none';
+                document.getElementById('messageScreen').classList.remove('hidden');
+                document.getElementById('musicPlayer').classList.remove('hidden');
+                document.getElementById('navBar').classList.remove('hidden');
+                music.play();
+                musicThumb.classList.add('rotating');
+                startTyping();
+                revealElements();
+            } else { alert("كلمة السر هي Love ❤️"); }
+        }
+
+        function startTyping() {
+            let i = 0;
+            const target = document.getElementById("typedLetter");
+            const btn = document.getElementById("afterTypeBtn");
+            const skipBtn = document.getElementById("skipBtn");
+            
+            typingInterval = setInterval(() => {
+                if (i < messageText.length) {
+                    target.innerHTML += messageText.charAt(i) === "\n" ? "<br>" : messageText.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                    btn.classList.remove("hidden");
+                    skipBtn.classList.add("hidden");
+                }
+            }, 40);
+        }
+
+        function skipTyping() {
+            clearInterval(typingInterval);
+            const target = document.getElementById("typedLetter");
+            const btn = document.getElementById("afterTypeBtn");
+            const skipBtn = document.getElementById("skipBtn");
+            
+            target.innerHTML = messageText.replace(/\n/g, "<br>");
+            btn.classList.remove("hidden");
+            skipBtn.classList.add("hidden");
+            triggerHaptic();
+        }
+
+        function togglePlay() {
+            triggerHaptic();
+            if (music.paused) { music.play(); playBtn.innerText = "⏸"; musicThumb.classList.add('rotating'); } 
+            else { music.pause(); playBtn.innerText = "▶"; musicThumb.classList.remove('rotating'); }
+        }
+
+        function showGallery() {
+            triggerHaptic();
+            document.getElementById('messageScreen').style.display = 'none';
+            document.getElementById('gallerySection').classList.remove('hidden');
+            if(video) video.load();
+            revealElements();
+        }
+
+        function openPopup() { document.getElementById('messagePopup').classList.remove('hidden'); triggerHaptic(); }
+        function closePopup() { document.getElementById('messagePopup').classList.add('hidden'); }
+        function openTimeline() { document.getElementById('timelinePopup').classList.remove('hidden'); triggerHaptic(); }
+        function closeTimeline() { document.getElementById('timelinePopup').classList.add('hidden'); }
+
+        function goBack() {
+            if (!document.getElementById('timelinePopup').classList.contains('hidden')) {
+                closeTimeline();
+            } else if (!document.getElementById('messagePopup').classList.contains('hidden')) {
+                closePopup();
+            } else if (!document.getElementById('gallerySection').classList.contains('hidden')) {
+                document.getElementById('gallerySection').classList.add('hidden');
+                document.getElementById('messageScreen').style.display = 'block';
+            } else {
+                location.reload(); 
+            }
+        }
+
+        function updateTimer() {
+            const start = new Date("2024-12-08T00:00:00");
+            const now = new Date();
+            const diff = now - start;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('mins').innerText = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('secs').innerText = Math.floor((diff / 1000) % 60);
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
